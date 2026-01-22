@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { IoSend, IoClose } from "react-icons/io5";
+import { IoClose, IoSend } from "react-icons/io5";
 
 import type { UserPreferences } from "../../types/preferences";
 import {
-    getCardStyles,
-    getBadgeStyles,
-    getLinkStyles,
-    getLineHeight,
-    getDisabledStyles,
-    getBorderUsageStyles,
+  getBadgeStyles,
+  getBorderUsageStyles,
+  getCardStyles,
+  getDisabledStyles,
+  getLineHeight,
+  getLinkStyles,
 } from "../../utils/styleHelpers";
 
 interface FormPreviewProps {
-    preferences: UserPreferences;
+  preferences: UserPreferences;
 }
 
 /**
@@ -20,66 +20,66 @@ interface FormPreviewProps {
  * All styles are driven by CSS variables from preferences
  */
 export function FormPreview({ preferences }: FormPreviewProps) {
-    const buttonStyle = preferences.buttonStyle || "filled";
-    const inputStyle = preferences.inputStyle || "filled";
-    const cardStyle = preferences.cardStyle || "filled";
-    const badgeStyle = preferences.badgeStyle || "subtle";
-    const linkStyle = preferences.linkStyle || "color";
-    const lineHeight = preferences.lineHeight || "normal";
-    const textAlignment = preferences.textAlignment || "left";
-    const fontWeight = preferences.fontWeight || "regular";
-    const disabledState = preferences.disabledState || "opacity";
-    const borderUsage = preferences.borderUsage || "subtle";
-    const [toggleOn, setToggleOn] = useState(true);
+  const buttonStyle = preferences.buttonStyle || "filled";
+  const inputStyle = preferences.inputStyle || "filled";
+  const cardStyle = preferences.cardStyle || "filled";
+  const badgeStyle = preferences.badgeStyle || "subtle";
+  const linkStyle = preferences.linkStyle || "color";
+  const lineHeight = preferences.lineHeight || "normal";
+  const textAlignment = preferences.textAlignment || "left";
+  const fontWeight = preferences.fontWeight || "regular";
+  const disabledState = preferences.disabledState || "opacity";
+  const borderUsage = preferences.borderUsage || "subtle";
+  const [toggleOn, setToggleOn] = useState(true);
 
-    const getFontWeights = () => {
-        switch (fontWeight) {
-            case "light":
-                return { normal: 300, semibold: 500, bold: 600 };
-            case "heavy":
-                return { normal: 500, semibold: 700, bold: 900 };
-            default:
-                return { normal: 400, semibold: 600, bold: 700 };
-        }
-    };
-    const weights = getFontWeights();
+  const getFontWeights = () => {
+    switch (fontWeight) {
+      case "light":
+        return { normal: 300, semibold: 500, bold: 600 };
+      case "heavy":
+        return { normal: 500, semibold: 700, bold: 900 };
+      default:
+        return { normal: 400, semibold: 600, bold: 700 };
+    }
+  };
+  const weights = getFontWeights();
 
-    return (
+  return (
+    <div
+      className="min-h-full"
+      style={{
+        backgroundColor: "var(--preview-bg)",
+        color: "var(--preview-text)",
+        lineHeight: getLineHeight(lineHeight),
+        textAlign: textAlignment as "left" | "center" | "justify",
+        fontWeight: weights.normal,
+      }}
+    >
+      {/* Header */}
+      <header
+        style={{
+          padding: "var(--preview-padding)",
+          ...getBorderUsageStyles(borderUsage),
+          borderTop: "none",
+          borderLeft: "none",
+          borderRight: "none",
+        }}
+      >
         <div
-            className="min-h-full"
-            style={{
-                backgroundColor: "var(--preview-bg)",
-                color: "var(--preview-text)",
-                lineHeight: getLineHeight(lineHeight),
-                textAlign: textAlignment as "left" | "center" | "justify",
-                fontWeight: weights.normal,
-            }}
+          className="mx-auto flex items-center justify-between"
+          style={{ maxWidth: "var(--preview-container, 80rem)" }}
         >
-            {/* Header */}
-            <header
-                style={{
-                    padding: "var(--preview-padding)",
-                    ...getBorderUsageStyles(borderUsage),
-                    borderTop: "none",
-                    borderLeft: "none",
-                    borderRight: "none",
-                }}
-            >
-              <div
-                className="mx-auto flex items-center justify-between"
-                style={{ maxWidth: "var(--preview-container, 80rem)" }}
-              >
-                <h1
-                    style={{
-                        fontSize: "var(--preview-text-xl)",
-                        fontWeight: weights.bold,
-                    }}
-                >
-                    Share Feedback
-                </h1>
-                <span style={getBadgeStyles(badgeStyle, "accent")}>New</span>
-              </div>
-            </header>
+          <h1
+            style={{
+              fontSize: "var(--preview-text-xl)",
+              fontWeight: weights.bold,
+            }}
+          >
+            Share Feedback
+          </h1>
+          <span style={getBadgeStyles(badgeStyle, "accent")}>New</span>
+        </div>
+      </header>
 
       {/* Main content */}
       <main
@@ -89,24 +89,24 @@ export function FormPreview({ preferences }: FormPreviewProps) {
           maxWidth: "var(--preview-container, 48rem)",
         }}
       >
-                {/* Contact section */}
-                <section
-                    style={{
-                        ...getCardStyles(cardStyle),
-                        ...getBorderUsageStyles(borderUsage),
-                        padding: "var(--preview-padding-lg)",
-                        marginBottom: "var(--preview-gap-lg)",
-                    }}
-                >
-                    <h2
-                        className="mb-4"
-                        style={{
-                            fontSize: "var(--preview-text-lg)",
-                            fontWeight: weights.semibold,
-                        }}
-                    >
-                        Your Details
-                    </h2>
+        {/* Contact section */}
+        <section
+          style={{
+            ...getCardStyles(cardStyle),
+            ...getBorderUsageStyles(borderUsage),
+            padding: "var(--preview-padding-lg)",
+            marginBottom: "var(--preview-gap-lg)",
+          }}
+        >
+          <h2
+            className="mb-4"
+            style={{
+              fontSize: "var(--preview-text-lg)",
+              fontWeight: weights.semibold,
+            }}
+          >
+            Your Details
+          </h2>
 
           <div className="flex flex-col" style={{ gap: "var(--preview-gap)" }}>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -132,24 +132,24 @@ export function FormPreview({ preferences }: FormPreviewProps) {
           </div>
         </section>
 
-                {/* Feedback options */}
-                <section
-                    style={{
-                        ...getCardStyles(cardStyle),
-                        ...getBorderUsageStyles(borderUsage),
-                        padding: "var(--preview-padding-lg)",
-                        marginBottom: "var(--preview-gap-lg)",
-                    }}
-                >
-                    <h2
-                        className="mb-4"
-                        style={{
-                            fontSize: "var(--preview-text-lg)",
-                            fontWeight: weights.semibold,
-                        }}
-                    >
-                        Feedback Type
-                    </h2>
+        {/* Feedback options */}
+        <section
+          style={{
+            ...getCardStyles(cardStyle),
+            ...getBorderUsageStyles(borderUsage),
+            padding: "var(--preview-padding-lg)",
+            marginBottom: "var(--preview-gap-lg)",
+          }}
+        >
+          <h2
+            className="mb-4"
+            style={{
+              fontSize: "var(--preview-text-lg)",
+              fontWeight: weights.semibold,
+            }}
+          >
+            Feedback Type
+          </h2>
 
           <div className="flex flex-col" style={{ gap: "var(--preview-gap)" }}>
             {/* Toggle */}
@@ -214,53 +214,52 @@ export function FormPreview({ preferences }: FormPreviewProps) {
               >
                 I agree to the{" "}
                 <span style={getLinkStyles(linkStyle)}>terms of service</span>{" "}
-                and{" "}
-                <span style={getLinkStyles(linkStyle)}>privacy policy</span>
+                and <span style={getLinkStyles(linkStyle)}>privacy policy</span>
               </label>
             </div>
           </div>
         </section>
 
-                {/* Actions */}
-                <div
-                    className="flex flex-wrap justify-end"
-                    style={{ gap: "var(--preview-gap)" }}
-                >
-                    <PreviewButton
-                        style={buttonStyle}
-                        disabled
-                        disabledStyle={disabledState}
-                    >
-                        <IoClose
-                            style={{
-                                width: "var(--preview-icon-size, 20px)",
-                                height: "var(--preview-icon-size, 20px)",
-                            }}
-                        />
-                        Disabled
-                    </PreviewButton>
-                    <PreviewButton style={buttonStyle} secondary>
-                        <IoClose
-                            style={{
-                                width: "var(--preview-icon-size, 20px)",
-                                height: "var(--preview-icon-size, 20px)",
-                            }}
-                        />
-                        Cancel
-                    </PreviewButton>
-                    <PreviewButton style={buttonStyle}>
-                        <IoSend
-                            style={{
-                                width: "var(--preview-icon-size, 20px)",
-                                height: "var(--preview-icon-size, 20px)",
-                            }}
-                        />
-                        Send Feedback
-                    </PreviewButton>
-                </div>
-            </main>
+        {/* Actions */}
+        <div
+          className="flex flex-wrap justify-end"
+          style={{ gap: "var(--preview-gap)" }}
+        >
+          <PreviewButton
+            style={buttonStyle}
+            disabled
+            disabledStyle={disabledState}
+          >
+            <IoClose
+              style={{
+                width: "var(--preview-icon-size, 20px)",
+                height: "var(--preview-icon-size, 20px)",
+              }}
+            />
+            Disabled
+          </PreviewButton>
+          <PreviewButton style={buttonStyle} secondary>
+            <IoClose
+              style={{
+                width: "var(--preview-icon-size, 20px)",
+                height: "var(--preview-icon-size, 20px)",
+              }}
+            />
+            Cancel
+          </PreviewButton>
+          <PreviewButton style={buttonStyle}>
+            <IoSend
+              style={{
+                width: "var(--preview-icon-size, 20px)",
+                height: "var(--preview-icon-size, 20px)",
+              }}
+            />
+            Send Feedback
+          </PreviewButton>
         </div>
-    );
+      </main>
+    </div>
+  );
 }
 
 function FormField({
@@ -437,112 +436,112 @@ function RadioOption({
 }
 
 function PreviewButton({
-    children,
-    style,
-    secondary = false,
-    disabled = false,
-    disabledStyle = "opacity",
+  children,
+  style,
+  secondary = false,
+  disabled = false,
+  disabledStyle = "opacity",
 }: {
-    children: React.ReactNode;
-    style: string;
-    secondary?: boolean;
-    disabled?: boolean;
-    disabledStyle?: string;
+  children: React.ReactNode;
+  style: string;
+  secondary?: boolean;
+  disabled?: boolean;
+  disabledStyle?: string;
 }) {
-    const baseStyle: React.CSSProperties = {
-        padding: "var(--preview-padding)",
-        borderRadius: "var(--preview-button-radius)",
-        fontSize: "var(--preview-text-sm)",
-        fontWeight: 600,
-        transitionDuration: "var(--preview-duration)",
-        cursor: disabled ? "not-allowed" : "pointer",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "0.5rem",
-    };
+  const baseStyle: React.CSSProperties = {
+    padding: "var(--preview-padding)",
+    borderRadius: "var(--preview-button-radius)",
+    fontSize: "var(--preview-text-sm)",
+    fontWeight: 600,
+    transitionDuration: "var(--preview-duration)",
+    cursor: disabled ? "not-allowed" : "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.5rem",
+  };
 
-    const disabledStyles = disabled ? getDisabledStyles(disabledStyle) : {};
+  const disabledStyles = disabled ? getDisabledStyles(disabledStyle) : {};
 
-    if (secondary) {
-        return (
-            <button
-                type="button"
-                disabled={disabled}
-                style={{
-                    ...baseStyle,
-                    border: "1px solid var(--preview-border)",
-                    backgroundColor: "transparent",
-                    color: "var(--preview-text)",
-                    ...disabledStyles,
-                }}
-            >
-                {children}
-            </button>
-        );
-    }
+  if (secondary) {
+    return (
+      <button
+        type="button"
+        disabled={disabled}
+        style={{
+          ...baseStyle,
+          border: "1px solid var(--preview-border)",
+          backgroundColor: "transparent",
+          color: "var(--preview-text)",
+          ...disabledStyles,
+        }}
+      >
+        {children}
+      </button>
+    );
+  }
 
-    switch (style) {
-        case "outline":
-            return (
-                <button
-                    type="button"
-                    disabled={disabled}
-                    style={{
-                        ...baseStyle,
-                        border: "2px solid var(--preview-accent)",
-                        backgroundColor: "transparent",
-                        color: "var(--preview-accent)",
-                        ...disabledStyles,
-                    }}
-                >
-                    {children}
-                </button>
-            );
-        case "ghost":
-            return (
-                <button
-                    type="button"
-                    disabled={disabled}
-                    style={{
-                        ...baseStyle,
-                        backgroundColor: "transparent",
-                        color: "var(--preview-accent)",
-                        ...disabledStyles,
-                    }}
-                >
-                    {children}
-                </button>
-            );
-        case "gradient":
-            return (
-                <button
-                    type="button"
-                    disabled={disabled}
-                    style={{
-                        ...baseStyle,
-                        background:
-                            "linear-gradient(135deg, var(--preview-accent), #8b5cf6)",
-                        color: "white",
-                        ...disabledStyles,
-                    }}
-                >
-                    {children}
-                </button>
-            );
-        default:
-            return (
-                <button
-                    type="button"
-                    disabled={disabled}
-                    style={{
-                        ...baseStyle,
-                        backgroundColor: "var(--preview-accent)",
-                        color: "white",
-                        ...disabledStyles,
-                    }}
-                >
-                    {children}
-                </button>
-            );
-    }
+  switch (style) {
+    case "outline":
+      return (
+        <button
+          type="button"
+          disabled={disabled}
+          style={{
+            ...baseStyle,
+            border: "2px solid var(--preview-accent)",
+            backgroundColor: "transparent",
+            color: "var(--preview-accent)",
+            ...disabledStyles,
+          }}
+        >
+          {children}
+        </button>
+      );
+    case "ghost":
+      return (
+        <button
+          type="button"
+          disabled={disabled}
+          style={{
+            ...baseStyle,
+            backgroundColor: "transparent",
+            color: "var(--preview-accent)",
+            ...disabledStyles,
+          }}
+        >
+          {children}
+        </button>
+      );
+    case "gradient":
+      return (
+        <button
+          type="button"
+          disabled={disabled}
+          style={{
+            ...baseStyle,
+            background:
+              "linear-gradient(135deg, var(--preview-accent), #8b5cf6)",
+            color: "white",
+            ...disabledStyles,
+          }}
+        >
+          {children}
+        </button>
+      );
+    default:
+      return (
+        <button
+          type="button"
+          disabled={disabled}
+          style={{
+            ...baseStyle,
+            backgroundColor: "var(--preview-accent)",
+            color: "white",
+            ...disabledStyles,
+          }}
+        >
+          {children}
+        </button>
+      );
+  }
 }

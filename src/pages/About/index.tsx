@@ -6,32 +6,32 @@ import type { UserPreferences } from "../../types/preferences";
 
 // Adam's curated preferences
 const adamsPreferences: UserPreferences = {
-    theme: "tokyo-night",
-    animationStyle: "minimal",
-    borderRadius: "md",
-    spacingDensity: "compact",
-    shadowStyle: "none",
-    borderUsage: "none",
-    typographyScale: "moderate",
-    lineHeight: "normal",
-    textAlignment: "left",
-    fontWeight: "regular",
-    fontFamily: "opensans",
-    buttonStyle: "filled",
-    inputStyle: "filled",
-    cardStyle: "filled",
-    badgeStyle: "solid",
-    linkStyle: "color",
-    focusStyle: "outline",
-    hoverStyle: "background",
-    disabledState: "grayscale",
-    loadingState: "spinner",
-    iconSize: "small",
-    containerWidth: "wide",
+  theme: "tokyo-night",
+  animationStyle: "minimal",
+  borderRadius: "md",
+  spacingDensity: "compact",
+  shadowStyle: "none",
+  borderUsage: "none",
+  typographyScale: "moderate",
+  lineHeight: "normal",
+  textAlignment: "left",
+  fontWeight: "regular",
+  fontFamily: "opensans",
+  buttonStyle: "filled",
+  inputStyle: "filled",
+  cardStyle: "filled",
+  badgeStyle: "solid",
+  linkStyle: "color",
+  focusStyle: "outline",
+  hoverStyle: "background",
+  disabledState: "grayscale",
+  loadingState: "spinner",
+  iconSize: "small",
+  containerWidth: "wide",
 };
 
 export default function About() {
-    const importPreferences = useSetAtom(importPreferencesAtom);
+  const importPreferences = useSetAtom(importPreferencesAtom);
   return (
     <div
       className="flex flex-1 flex-col"
@@ -190,7 +190,8 @@ export default function About() {
               onClick={() => importPreferences(adamsPreferences)}
               className="cursor-pointer font-medium text-white transition-colors"
               style={{
-                padding: "var(--preview-padding, 0.75rem) var(--preview-padding-lg, 1rem)",
+                padding:
+                  "var(--preview-padding, 0.75rem) var(--preview-padding-lg, 1rem)",
                 backgroundColor: "var(--preview-accent, #3b82f6)",
                 borderRadius: "var(--preview-radius, 0)",
                 transitionDuration: "var(--preview-duration, 150ms)",

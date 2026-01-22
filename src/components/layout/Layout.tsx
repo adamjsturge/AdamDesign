@@ -194,9 +194,7 @@ function Header() {
               fontSize: "var(--preview-text-sm, 0.875rem)",
               padding: "var(--preview-padding, 0.75rem)",
               backgroundColor:
-                location === "/"
-                  ? "var(--preview-bg, #0f172a)"
-                  : "transparent",
+                location === "/" ? "var(--preview-bg, #0f172a)" : "transparent",
               borderRadius: "var(--preview-radius, 0)",
             }}
           >

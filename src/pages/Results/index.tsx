@@ -7,8 +7,8 @@ import { FormPreview } from "../../components/preview/FormPreview";
 import { LandingPreview } from "../../components/preview/LandingPreview";
 import { PreviewWrapper } from "../../components/preview/PreviewWrapper";
 import {
-    generateExportJSON,
-    generateMarkdown,
+  generateExportJSON,
+  generateMarkdown,
 } from "../../utils/exportPreferences";
 
 type PreviewTab = "dashboard" | "form" | "landing";
@@ -265,4 +265,3 @@ function ExportPanel({ preferences }: { preferences: Record<string, string> }) {
     </div>
   );
 }
-

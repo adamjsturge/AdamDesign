@@ -7,9 +7,9 @@ export function darkenColor(hex: string, percent: number = 15): string {
 
   // Parse RGB values
   const num = Number.parseInt(cleanHex, 16);
-  const r = (num >> 16) & 0xFF;
-  const g = (num >> 8) & 0xFF;
-  const b = num & 0xFF;
+  const r = (num >> 16) & 0xff;
+  const g = (num >> 8) & 0xff;
+  const b = num & 0xff;
 
   // Darken each channel
   const factor = 1 - percent / 100;

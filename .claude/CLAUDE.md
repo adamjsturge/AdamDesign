@@ -2,15 +2,15 @@
 
 ## Tech Stack
 
-| Category | Choice |
-|----------|--------|
-| Framework | React + TypeScript (strict mode) |
-| Styling | Tailwind CSS v4 |
-| Build | Vite |
-| Routing | wouter |
-| State (simple) | React hooks (useState, useContext) |
-| State (complex) | Jotai atoms |
-| Icons | react-icons library |
+| Category        | Choice                             |
+| --------------- | ---------------------------------- |
+| Framework       | React + TypeScript (strict mode)   |
+| Styling         | Tailwind CSS v4                    |
+| Build           | Vite                               |
+| Routing         | wouter                             |
+| State (simple)  | React hooks (useState, useContext) |
+| State (complex) | Jotai atoms                        |
+| Icons           | react-icons library                |
 
 ---
 
@@ -29,13 +29,13 @@
 
 ### Visual Rules
 
-| Rule | Guideline |
-|------|-----------|
-| Shadows | Never. Use background contrast for hierarchy |
-| Corners | `rounded-none` or `rounded-sm` max |
-| Borders | Avoid unless necessary. Use background color differences |
-| Spacing | Tight - `gap-2`, `p-3` baseline |
-| Layout | Wide containers (`max-w-7xl`), responsive padding, mobile-first |
+| Rule    | Guideline                                                       |
+| ------- | --------------------------------------------------------------- |
+| Shadows | Never. Use background contrast for hierarchy                    |
+| Corners | `rounded-none` or `rounded-sm` max                              |
+| Borders | Avoid unless necessary. Use background color differences        |
+| Spacing | Tight - `gap-2`, `p-3` baseline                                 |
+| Layout  | Wide containers (`max-w-7xl`), responsive padding, mobile-first |
 
 ### Typography
 
@@ -46,31 +46,31 @@
 
 ### Interactive States
 
-| State | Treatment |
-|-------|-----------|
-| Hover | Subtle color change only, `cursor-pointer`, no scale/grow effects |
-| Disabled | Grayed out colors (not opacity), `cursor-not-allowed` |
-| Focus | Visible focus rings, high contrast outline (required) |
+| State    | Treatment                                                         |
+| -------- | ----------------------------------------------------------------- |
+| Hover    | Subtle color change only, `cursor-pointer`, no scale/grow effects |
+| Disabled | Grayed out colors (not opacity), `cursor-not-allowed`             |
+| Focus    | Visible focus rings, high contrast outline (required)             |
 
 ### Components
 
-| Component | Guidelines |
-|-----------|------------|
-| Buttons | Filled primary style, solid background, no shadows, minimal/no radius |
-| Inputs | Filled background, minimal/no border, clear focus state |
-| Loading | Skeleton placeholders (pulsing shapes) |
-| Empty States | Minimal - simple text or nothing |
-| Navigation | Desktop: top navbar. Mobile: hamburger with collapsible drawer |
-| Modals | Avoid. When unavoidable: center on desktop, fullscreen on mobile |
+| Component    | Guidelines                                                            |
+| ------------ | --------------------------------------------------------------------- |
+| Buttons      | Filled primary style, solid background, no shadows, minimal/no radius |
+| Inputs       | Filled background, minimal/no border, clear focus state               |
+| Loading      | Skeleton placeholders (pulsing shapes)                                |
+| Empty States | Minimal - simple text or nothing                                      |
+| Navigation   | Desktop: top navbar. Mobile: hamburger with collapsible drawer        |
+| Modals       | Avoid. When unavoidable: center on desktop, fullscreen on mobile      |
 
 ### Feedback
 
-| Type | Pattern |
-|------|---------|
-| Success | Toast notification, green |
-| Error (field) | Inline text below input, red |
-| Error (general) | Toast notification, red |
-| Warning | Yellow/orange |
+| Type            | Pattern                      |
+| --------------- | ---------------------------- |
+| Success         | Toast notification, green    |
+| Error (field)   | Inline text below input, red |
+| Error (general) | Toast notification, red      |
+| Warning         | Yellow/orange                |
 
 ### Theme Tokens
 
@@ -120,14 +120,14 @@ Dark themes: high contrast, visual hierarchy through background differences (not
 
 ### Naming Conventions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `CardImage.tsx` |
-| Functions | camelCase | `handleClick()` |
-| Variables | camelCase | `inputValue` |
-| Booleans | is/has prefix | `isLoading`, `hasError` |
-| Types/Interfaces | PascalCase | `CardImageProps` |
-| Files | Match export name | `SearchBar.tsx` |
+| Type             | Convention        | Example                 |
+| ---------------- | ----------------- | ----------------------- |
+| Components       | PascalCase        | `CardImage.tsx`         |
+| Functions        | camelCase         | `handleClick()`         |
+| Variables        | camelCase         | `inputValue`            |
+| Booleans         | is/has prefix     | `isLoading`, `hasError` |
+| Types/Interfaces | PascalCase        | `CardImageProps`        |
+| Files            | Match export name | `SearchBar.tsx`         |
 
 ### File Structure
 
