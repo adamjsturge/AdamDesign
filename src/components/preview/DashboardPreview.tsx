@@ -1,6 +1,5 @@
-import { IoAdd, IoDownload, IoSearch } from "react-icons/io5";
-
 import type { UserPreferences } from "../../types/preferences";
+import { Icon } from "../Icon";
 import {
   getBadgeStyles,
   getBorderUsageStyles,
@@ -190,34 +189,17 @@ export function DashboardPreview({ preferences }: DashboardPreviewProps) {
               style={{ gap: "var(--preview-gap)" }}
             >
               <PreviewButton style={buttonStyle}>
-                <IoAdd
-                  style={{
-                    width: "var(--preview-icon-size, 20px)",
-                    height: "var(--preview-icon-size, 20px)",
-                  }}
-                />
+                <Icon name="add" context="button" />
                 New Report
               </PreviewButton>
               <PreviewButton style={buttonStyle} secondary>
-                <IoDownload
-                  style={{
-                    width: "var(--preview-icon-size, 20px)",
-                    height: "var(--preview-icon-size, 20px)",
-                  }}
-                />
+                <Icon name="download" context="button" />
                 Export Data
               </PreviewButton>
               <PreviewInput
                 style={inputStyle}
                 placeholder="Search..."
-                icon={
-                  <IoSearch
-                    style={{
-                      width: "var(--preview-icon-size, 20px)",
-                      height: "var(--preview-icon-size, 20px)",
-                    }}
-                  />
-                }
+                icon={<Icon name="search" context="button" />}
               />
             </div>
           </div>

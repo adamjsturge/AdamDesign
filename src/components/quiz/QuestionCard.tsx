@@ -3,6 +3,7 @@ import type {
   UserPreferences,
 } from "../../types/preferences";
 import { OptionCard } from "./OptionCard";
+import { TextPreview } from "./TextPreview";
 import { ThemeQuestionCard } from "./ThemeQuestionCard";
 
 interface QuestionCardProps {
@@ -39,6 +40,9 @@ export function QuestionCard({
       className="flex flex-col"
       style={{ gap: "var(--preview-gap-lg, 1rem)" }}
     >
+      {/* Text preview for typography questions */}
+      {question.showTextPreview && <TextPreview className="mb-4" />}
+
       {/* Question header */}
       <div
         className="flex flex-col"

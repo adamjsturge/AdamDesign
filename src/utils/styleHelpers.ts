@@ -34,9 +34,9 @@ export function getCardStyles(
         ...base,
         backgroundColor: "var(--preview-bg-surface)",
         boxShadow:
-          shadow !== "none"
-            ? "var(--preview-shadow)"
-            : "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+          shadow === "none"
+            ? "0 4px 6px -1px rgb(0 0 0 / 0.1)"
+            : "var(--preview-shadow)",
       };
     case "transparent":
       return {

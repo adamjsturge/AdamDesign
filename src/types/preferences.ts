@@ -32,6 +32,8 @@ export interface PreferenceQuestion {
   defaultValue: PreferenceValue;
   // Flag for custom UI (e.g., theme question with color picker)
   hasCustomUI?: boolean;
+  // Show floating text preview for typography-related questions
+  showTextPreview?: boolean;
 }
 
 // User's selected preferences (maps question ID to selected option ID)

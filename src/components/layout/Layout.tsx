@@ -1,7 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { FaGithub } from "react-icons/fa";
-import { FaBars, FaShuffle, FaXmark } from "react-icons/fa6";
 import { Link, useLocation } from "wouter";
 
 import {
@@ -12,6 +10,7 @@ import {
 import { getPreviewStyle } from "../../utils/compilePreferences";
 import { loadFontFromPreference } from "../../utils/fontLoader";
 import { getButtonStyles } from "../../utils/styleHelpers";
+import { Icon } from "../Icon";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -141,7 +140,7 @@ function Header() {
             }}
             aria-label="Shuffle preferences"
           >
-            <FaShuffle size={14} />
+            <Icon name="shuffle" context="button" />
             <span className="hidden sm:inline">Shuffle</span>
           </button>
         </nav>
@@ -158,7 +157,7 @@ function Header() {
             }}
             aria-label="Shuffle preferences"
           >
-            <FaShuffle size={16} />
+            <Icon name="shuffle" context="button" />
           </button>
           <button
             type="button"
@@ -172,7 +171,11 @@ function Header() {
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <FaXmark size={20} /> : <FaBars size={20} />}
+            {isMobileMenuOpen ? (
+              <Icon name="close" context="header" />
+            ) : (
+              <Icon name="menu" context="header" />
+            )}
           </button>
         </div>
       </div>
@@ -343,7 +346,7 @@ function Footer() {
             }}
             aria-label="GitHub"
           >
-            <FaGithub size={20} />
+            <Icon name="github" context="header" />
           </a>
         </div>
       </div>

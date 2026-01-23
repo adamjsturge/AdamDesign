@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { IoClose, IoSend } from "react-icons/io5";
 
 import type { UserPreferences } from "../../types/preferences";
+import { Icon } from "../Icon";
 import {
   getBadgeStyles,
   getBorderUsageStyles,
@@ -230,30 +230,15 @@ export function FormPreview({ preferences }: FormPreviewProps) {
             disabled
             disabledStyle={disabledState}
           >
-            <IoClose
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="close" context="button" />
             Disabled
           </PreviewButton>
           <PreviewButton style={buttonStyle} secondary>
-            <IoClose
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="close" context="button" />
             Cancel
           </PreviewButton>
           <PreviewButton style={buttonStyle}>
-            <IoSend
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="send" context="button" />
             Send Feedback
           </PreviewButton>
         </div>

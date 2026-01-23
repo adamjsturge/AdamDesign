@@ -1,7 +1,7 @@
 import { useSetAtom } from "jotai";
-import { FaGithub } from "react-icons/fa";
 
 import { importPreferencesAtom } from "../../atoms/preferencesAtom";
+import { Icon } from "../../components/Icon";
 import type { UserPreferences } from "../../types/preferences";
 
 // Adam's curated preferences
@@ -26,7 +26,11 @@ const adamsPreferences: UserPreferences = {
   hoverStyle: "background",
   disabledState: "grayscale",
   loadingState: "spinner",
-  iconSize: "small",
+  iconLibrary: "ionicons",
+  iconStyle: "filled",
+  buttonIconSize: "small",
+  landingIconSize: "medium",
+  headerIconSize: "compact",
   containerWidth: "wide",
 };
 
@@ -284,7 +288,7 @@ export default function About() {
                 }}
                 aria-label="GitHub"
               >
-                <FaGithub size={24} />
+                <Icon name="github" size={24} />
               </a>
             </div>
           </section>

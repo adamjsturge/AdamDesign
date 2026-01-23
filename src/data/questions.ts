@@ -253,6 +253,7 @@ export const questions: PreferenceQuestion[] = [
     category: "typography",
     title: "Text Hierarchy",
     description: "How dramatic should size differences be?",
+    showTextPreview: true,
     options: [
       {
         id: "tight",
@@ -300,12 +301,39 @@ export const questions: PreferenceQuestion[] = [
     defaultValue: "tight",
   },
 
-  // Question 7b: Line Height
+  // Question 7b: Text Color Contrast
+  {
+    id: "textColorContrast",
+    category: "typography",
+    title: "Text Color Contrast",
+    description: "Should all text be the same color, or should titles stand out?",
+    showTextPreview: true,
+    options: [
+      {
+        id: "uniform",
+        label: "Uniform",
+        description: "All text uses the same color",
+        cssVars: {
+          "--preview-text-secondary": "var(--preview-text)",
+        },
+      },
+      {
+        id: "hierarchical",
+        label: "Hierarchical",
+        description: "Titles prominent, body text muted",
+        cssVars: {},
+      },
+    ],
+    defaultValue: "hierarchical",
+  },
+
+  // Question 7c: Line Height
   {
     id: "lineHeight",
     category: "typography",
     title: "Line Height",
     description: "How much space between lines of text?",
+    showTextPreview: true,
     options: [
       {
         id: "tight",
@@ -338,12 +366,13 @@ export const questions: PreferenceQuestion[] = [
     defaultValue: "normal",
   },
 
-  // Question 7c: Text Alignment
+  // Question 7d: Text Alignment
   {
     id: "textAlignment",
     category: "typography",
     title: "Text Alignment",
     description: "How should body text be aligned?",
+    showTextPreview: true,
     options: [
       {
         id: "left",
@@ -367,12 +396,13 @@ export const questions: PreferenceQuestion[] = [
     defaultValue: "center",
   },
 
-  // Question 7d: Font Weight
+  // Question 7e: Font Weight
   {
     id: "fontWeight",
     category: "typography",
     title: "Font Weight",
     description: "How bold should text appear?",
+    showTextPreview: true,
     options: [
       {
         id: "light",
@@ -414,6 +444,7 @@ export const questions: PreferenceQuestion[] = [
     category: "typography",
     title: "Font Family",
     description: "Choose your preferred typeface",
+    showTextPreview: true,
     options: [
       {
         id: "system",
@@ -781,42 +812,167 @@ export const questions: PreferenceQuestion[] = [
     defaultValue: "spinner",
   },
 
-  // Question 17: Icon Size
+  // Question 17: Icon Library
   {
-    id: "iconSize",
+    id: "iconLibrary",
     category: "components",
-    title: "Icon Size",
-    description: "How large should icons be?",
+    title: "Icon Library",
+    description: "Which icon style family do you prefer?",
+    options: [
+      {
+        id: "fontawesome",
+        label: "Font Awesome",
+        description: "Classic, widely-used icon set",
+        cssVars: { "--preview-icon-library": "fontawesome" },
+      },
+      {
+        id: "ionicons",
+        label: "Ionicons",
+        description: "Clean icons from Ionic framework",
+        cssVars: { "--preview-icon-library": "ionicons" },
+      },
+      {
+        id: "lucide",
+        label: "Lucide",
+        description: "Modern fork of Feather icons",
+        cssVars: { "--preview-icon-library": "lucide" },
+      },
+      {
+        id: "heroicons",
+        label: "Heroicons",
+        description: "Beautiful icons by Tailwind CSS",
+        cssVars: { "--preview-icon-library": "heroicons" },
+      },
+    ],
+    defaultValue: "ionicons",
+  },
+
+  // Question 18: Icon Style
+  {
+    id: "iconStyle",
+    category: "components",
+    title: "Icon Style",
+    description: "How should icons be rendered?",
+    options: [
+      {
+        id: "sharp",
+        label: "Sharp",
+        description: "Crisp, angular corners",
+        cssVars: { "--preview-icon-style": "sharp" },
+      },
+      {
+        id: "rounded",
+        label: "Rounded",
+        description: "Soft, friendly corners",
+        cssVars: { "--preview-icon-style": "rounded" },
+      },
+      {
+        id: "outlined",
+        label: "Outlined",
+        description: "Stroke-only, minimal weight",
+        cssVars: { "--preview-icon-style": "outlined" },
+      },
+      {
+        id: "filled",
+        label: "Filled",
+        description: "Solid, bold presence",
+        cssVars: { "--preview-icon-style": "filled" },
+      },
+    ],
+    defaultValue: "filled",
+  },
+
+  // Question 19: Button Icon Size
+  {
+    id: "buttonIconSize",
+    category: "components",
+    title: "Button Icon Size",
+    description: "How large should icons in buttons be?",
     options: [
       {
         id: "small",
         label: "Small",
-        description: "Compact 16px icons",
-        cssVars: {
-          "--preview-icon-size": "16px",
-          "--preview-icon-size-lg": "20px",
-        },
+        description: "Compact 14px icons",
+        cssVars: { "--preview-button-icon-size": "14px" },
       },
       {
         id: "medium",
         label: "Medium",
-        description: "Standard 20px icons",
-        cssVars: {
-          "--preview-icon-size": "20px",
-          "--preview-icon-size-lg": "24px",
-        },
+        description: "Standard 18px icons",
+        cssVars: { "--preview-button-icon-size": "18px" },
       },
       {
         id: "large",
         label: "Large",
-        description: "Prominent 24px icons",
-        cssVars: {
-          "--preview-icon-size": "24px",
-          "--preview-icon-size-lg": "32px",
-        },
+        description: "Prominent 22px icons",
+        cssVars: { "--preview-button-icon-size": "22px" },
       },
     ],
     defaultValue: "medium",
+  },
+
+  // Question 20: Landing Page Icon Size
+  {
+    id: "landingIconSize",
+    category: "components",
+    title: "Feature Icon Size",
+    description: "How large should feature/hero icons be?",
+    options: [
+      {
+        id: "small",
+        label: "Small",
+        description: "Compact 32px icons",
+        cssVars: { "--preview-landing-icon-size": "32px" },
+      },
+      {
+        id: "medium",
+        label: "Medium",
+        description: "Standard 40px icons",
+        cssVars: { "--preview-landing-icon-size": "40px" },
+      },
+      {
+        id: "large",
+        label: "Large",
+        description: "Prominent 48px icons",
+        cssVars: { "--preview-landing-icon-size": "48px" },
+      },
+      {
+        id: "xlarge",
+        label: "Extra Large",
+        description: "Statement 56px icons",
+        cssVars: { "--preview-landing-icon-size": "56px" },
+      },
+    ],
+    defaultValue: "medium",
+  },
+
+  // Question 21: Header Icon Size
+  {
+    id: "headerIconSize",
+    category: "components",
+    title: "Header Icon Size",
+    description: "How large should navigation icons be?",
+    options: [
+      {
+        id: "compact",
+        label: "Compact",
+        description: "Minimal 14px icons",
+        cssVars: { "--preview-header-icon-size": "14px" },
+      },
+      {
+        id: "standard",
+        label: "Standard",
+        description: "Balanced 16px icons",
+        cssVars: { "--preview-header-icon-size": "16px" },
+      },
+      {
+        id: "comfortable",
+        label: "Comfortable",
+        description: "Spacious 20px icons",
+        cssVars: { "--preview-header-icon-size": "20px" },
+      },
+    ],
+    defaultValue: "standard",
   },
 
   // Question 18: Container Width

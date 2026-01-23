@@ -4,7 +4,13 @@ import type {
   PreferenceQuestion,
   QuestionOption,
 } from "../../types/preferences";
+import type {
+  IconLibrary,
+  IconStyle,
+} from "../../types/icons";
+import { LIBRARY_STYLES } from "../../types/icons";
 import { loadFont } from "../../utils/fontLoader";
+import { StaticIcon } from "../Icon";
 
 interface OptionCardProps {
   option: QuestionOption;
@@ -128,6 +134,36 @@ function OptionPreview({
 
     case "disabledState":
       return <DisabledStatePreview style={option.id} />;
+
+    case "iconLibrary":
+      return <IconLibraryPreview library={option.id as IconLibrary} />;
+
+    case "iconStyle":
+      return <IconStylePreview style={option.id as IconStyle} />;
+
+    case "buttonIconSize":
+      return (
+        <IconSizePreview
+          size={option.cssVars?.["--preview-button-icon-size"] || "18px"}
+          context="button"
+        />
+      );
+
+    case "landingIconSize":
+      return (
+        <IconSizePreview
+          size={option.cssVars?.["--preview-landing-icon-size"] || "40px"}
+          context="landing"
+        />
+      );
+
+    case "headerIconSize":
+      return (
+        <IconSizePreview
+          size={option.cssVars?.["--preview-header-icon-size"] || "16px"}
+          context="header"
+        />
+      );
 
     default:
       return <div className="bg-brand-grayDark h-16 w-full" />;
@@ -760,6 +796,7 @@ function HoverStylePreview({ style }: { style: string }) {
       style={{ height: "5rem", padding: "0.5rem", paddingTop: "1rem" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="presentation"
     >
       <span
         className="text-brand-gray absolute top-1 left-2"
@@ -869,6 +906,169 @@ function DisabledStatePreview({ style }: { style: string }) {
           {style === "grayscale" && "No color"}
           {style === "muted" && "Subtle colors"}
         </span>
+      </div>
+    </div>
+  );
+}
+
+// Preview showing icons from different libraries
+function IconLibraryPreview({ library }: { library: IconLibrary }) {
+  // Use filled style for most, outlined for lucide
+  const style: IconStyle = library === "lucide" ? "outlined" : "filled";
+
+  return (
+    <div
+      className="bg-brand-black flex w-full items-center justify-center gap-4"
+      style={{ height: "5rem", padding: "0.75rem" }}
+    >
+      <div className="flex items-center gap-3">
+        <StaticIcon name="play" library={library} style={style} size={20} />
+        <StaticIcon name="search" library={library} style={style} size={20} />
+        <StaticIcon name="menu" library={library} style={style} size={20} />
+        <StaticIcon name="settings" library={library} style={style} size={20} />
+      </div>
+    </div>
+  );
+}
+
+// Preview showing icon style variations
+function IconStylePreview({ style }: { style: IconStyle }) {
+  // Use ionicons as it supports all styles
+  const library: IconLibrary = "ionicons";
+  const availableStyles = LIBRARY_STYLES[library];
+  const effectiveStyle = availableStyles.includes(style) ? style : "filled";
+
+  return (
+    <div
+      className="bg-brand-black flex w-full items-center justify-center gap-4"
+      style={{ height: "5rem", padding: "0.75rem" }}
+    >
+      <div className="flex items-center gap-3">
+        <StaticIcon
+          name="lightning"
+          library={library}
+          style={effectiveStyle}
+          size={24}
+        />
+        <StaticIcon
+          name="shield"
+          library={library}
+          style={effectiveStyle}
+          size={24}
+        />
+        <StaticIcon
+          name="home"
+          library={library}
+          style={effectiveStyle}
+          size={24}
+        />
+      </div>
+    </div>
+  );
+}
+
+// Preview showing icon sizes with scale reference
+function IconSizePreview({
+  size,
+  context,
+}: {
+  size: string;
+  context: "button" | "landing" | "header";
+}) {
+  const sizeNum = Number.parseInt(size);
+
+  // Different preview layouts based on context
+  if (context === "landing") {
+    return (
+      <div
+        className="bg-brand-black flex w-full items-center justify-center"
+        style={{ height: "5rem", padding: "0.5rem" }}
+      >
+        <div
+          className="flex items-center justify-center"
+          style={{
+            width: `${sizeNum + 16}px`,
+            height: `${sizeNum + 16}px`,
+            backgroundColor: "#3b82f620",
+            borderRadius: "0.25rem",
+          }}
+        >
+          <StaticIcon
+            name="lightning"
+            library="ionicons"
+            style="filled"
+            size={sizeNum}
+            cssStyle={{ color: "#3b82f6" }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (context === "header") {
+    return (
+      <div
+        className="bg-brand-black flex w-full items-center justify-between"
+        style={{ height: "4rem", padding: "0.75rem" }}
+      >
+        <div className="flex items-center gap-2">
+          <StaticIcon
+            name="menu"
+            library="ionicons"
+            style="filled"
+            size={sizeNum}
+          />
+          <span className="text-brand-gray" style={{ fontSize: "0.625rem" }}>
+            Nav
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <StaticIcon
+            name="search"
+            library="ionicons"
+            style="filled"
+            size={sizeNum}
+          />
+          <StaticIcon
+            name="settings"
+            library="ionicons"
+            style="filled"
+            size={sizeNum}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Button context
+  return (
+    <div
+      className="bg-brand-black flex w-full items-center justify-center gap-3"
+      style={{ height: "4rem", padding: "0.75rem" }}
+    >
+      <div
+        className="flex items-center gap-1.5 bg-blue-500 px-2 py-1"
+        style={{ fontSize: "0.625rem", fontWeight: 600, color: "#ffffff" }}
+      >
+        <StaticIcon
+          name="add"
+          library="ionicons"
+          style="filled"
+          size={sizeNum}
+        />
+        <span>Add</span>
+      </div>
+      <div
+        className="flex items-center gap-1.5 bg-blue-500 px-2 py-1"
+        style={{ fontSize: "0.625rem", fontWeight: 600, color: "#ffffff" }}
+      >
+        <StaticIcon
+          name="shuffle"
+          library="ionicons"
+          style="filled"
+          size={sizeNum}
+        />
+        <span>Shuffle</span>
       </div>
     </div>
   );

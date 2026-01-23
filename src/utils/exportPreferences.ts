@@ -358,10 +358,22 @@ export const containerWidths = {
 } as const;
 
 // ============================================================================
+// Export Options
+// ============================================================================
+
+export type ExportOptions = {
+  excludeColors?: boolean;
+};
+
+// ============================================================================
 // Markdown Generator
 // ============================================================================
 
-export function generateMarkdown(preferences: Record<string, string>): string {
+export function generateMarkdown(
+  preferences: Record<string, string>,
+  options: ExportOptions = {},
+): string {
+  const { excludeColors = false } = options;
   const colorScheme =
     colorSchemes[preferences.colorScheme as keyof typeof colorSchemes] ??
     colorSchemes.dark;
@@ -412,8 +424,12 @@ export function generateMarkdown(preferences: Record<string, string>): string {
     ``,
     `| Category | Choice | Tailwind |`,
     `|----------|--------|----------|`,
-    `| Theme | ${colorScheme.name} | ${colorScheme.tailwind.background} |`,
-    `| Accent | ${accent.name} | ${accent.tailwind} |`,
+    ...(excludeColors
+      ? []
+      : [
+          `| Theme | ${colorScheme.name} | ${colorScheme.tailwind.background} |`,
+          `| Accent | ${accent.name} | ${accent.tailwind} |`,
+        ]),
     `| Font | ${font.name} | ${font.tailwind} |`,
     `| Spacing | ${spacing.name} | ${spacing.tailwind.gap}, ${spacing.tailwind.padding} |`,
     `| Corners | ${radius.name} | ${radius.tailwind} |`,
@@ -423,25 +439,29 @@ export function generateMarkdown(preferences: Record<string, string>): string {
     ``,
     `---`,
     ``,
-    `## Color Scheme: ${colorScheme.name}`,
-    ``,
-    `${colorScheme.description}`,
-    ``,
-    `| Role | Hex | Tailwind Class |`,
-    `|------|-----|----------------|`,
-    `| Background | \`${colorScheme.background}\` | \`${colorScheme.tailwind.background}\` |`,
-    `| Surface | \`${colorScheme.surface}\` | \`${colorScheme.tailwind.surface}\` |`,
-    `| Text | \`${colorScheme.text}\` | \`${colorScheme.tailwind.text}\` |`,
-    `| Text Secondary | \`${colorScheme.textSecondary}\` | \`${colorScheme.tailwind.textSecondary}\` |`,
-    ``,
-    `### Accent Color: ${accent.name}`,
-    ``,
-    `- **Hex**: \`${accent.hex}\``,
-    `- **Tailwind**: \`bg-${accent.tailwind}\`, \`text-${accent.tailwind}\`, \`border-${accent.tailwind}\``,
-    `- **Usage**: ${accent.usage}`,
-    ``,
-    `---`,
-    ``,
+    ...(excludeColors
+      ? []
+      : [
+          `## Color Scheme: ${colorScheme.name}`,
+          ``,
+          `${colorScheme.description}`,
+          ``,
+          `| Role | Hex | Tailwind Class |`,
+          `|------|-----|----------------|`,
+          `| Background | \`${colorScheme.background}\` | \`${colorScheme.tailwind.background}\` |`,
+          `| Surface | \`${colorScheme.surface}\` | \`${colorScheme.tailwind.surface}\` |`,
+          `| Text | \`${colorScheme.text}\` | \`${colorScheme.tailwind.text}\` |`,
+          `| Text Secondary | \`${colorScheme.textSecondary}\` | \`${colorScheme.tailwind.textSecondary}\` |`,
+          ``,
+          `### Accent Color: ${accent.name}`,
+          ``,
+          `- **Hex**: \`${accent.hex}\``,
+          `- **Tailwind**: \`bg-${accent.tailwind}\`, \`text-${accent.tailwind}\`, \`border-${accent.tailwind}\``,
+          `- **Usage**: ${accent.usage}`,
+          ``,
+          `---`,
+          ``,
+        ]),
     `## Typography`,
     ``,
     `### Font: ${font.name}`,
@@ -548,13 +568,17 @@ export function generateMarkdown(preferences: Record<string, string>): string {
     ``,
     `\`\`\`css`,
     `:root {`,
-    `  /* Colors */`,
-    `  --color-background: ${colorScheme.background};`,
-    `  --color-surface: ${colorScheme.surface};`,
-    `  --color-text: ${colorScheme.text};`,
-    `  --color-text-secondary: ${colorScheme.textSecondary};`,
-    `  --color-accent: ${accent.hex};`,
-    ``,
+    ...(excludeColors
+      ? []
+      : [
+          `  /* Colors */`,
+          `  --color-background: ${colorScheme.background};`,
+          `  --color-surface: ${colorScheme.surface};`,
+          `  --color-text: ${colorScheme.text};`,
+          `  --color-text-secondary: ${colorScheme.textSecondary};`,
+          `  --color-accent: ${accent.hex};`,
+          ``,
+        ]),
     `  /* Spacing */`,
     `  --spacing-gap: ${spacing.gap};`,
     `  --spacing-padding: ${spacing.padding};`,
@@ -579,15 +603,19 @@ export function generateMarkdown(preferences: Record<string, string>): string {
     `module.exports = {`,
     `  theme: {`,
     `    extend: {`,
-    `      colors: {`,
-    `        brand: {`,
-    `          background: '${colorScheme.background}',`,
-    `          surface: '${colorScheme.surface}',`,
-    `          text: '${colorScheme.text}',`,
-    `          'text-secondary': '${colorScheme.textSecondary}',`,
-    `          accent: '${accent.hex}',`,
-    `        },`,
-    `      },`,
+    ...(excludeColors
+      ? []
+      : [
+          `      colors: {`,
+          `        brand: {`,
+          `          background: '${colorScheme.background}',`,
+          `          surface: '${colorScheme.surface}',`,
+          `          text: '${colorScheme.text}',`,
+          `          'text-secondary': '${colorScheme.textSecondary}',`,
+          `          accent: '${accent.hex}',`,
+          `        },`,
+          `      },`,
+        ]),
     `      borderRadius: {`,
     `        DEFAULT: '${radius.value}',`,
     `      },`,
@@ -607,7 +635,12 @@ export function generateMarkdown(preferences: Record<string, string>): string {
 // JSON Export
 // ============================================================================
 
-export function generateExportJSON(preferences: Record<string, string>) {
+export function generateExportJSON(
+  preferences: Record<string, string>,
+  options: ExportOptions = {},
+) {
+  const { excludeColors = false } = options;
+
   const colorScheme =
     colorSchemes[preferences.colorScheme as keyof typeof colorSchemes] ??
     colorSchemes.dark;
@@ -646,13 +679,26 @@ export function generateExportJSON(preferences: Record<string, string>) {
       preferences.containerWidth as keyof typeof containerWidths
     ] ?? containerWidths.wide;
 
+  // Filter out color-related keys from preferences if excludeColors is true
+  const colorKeys = new Set([
+    "colorScheme",
+    "accentColor",
+    "theme",
+    "customColors",
+    "customAccentColor",
+  ]);
+  const filteredPreferences = excludeColors
+    ? Object.fromEntries(
+        Object.entries(preferences).filter(([key]) => !colorKeys.has(key)),
+      )
+    : preferences;
+
   return {
     version: "2.0",
     exportedAt: new Date().toISOString(),
-    preferences,
+    preferences: filteredPreferences,
     resolved: {
-      colorScheme,
-      accent,
+      ...(excludeColors ? {} : { colorScheme, accent }),
       font,
       typography,
       spacing,

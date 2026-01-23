@@ -19,7 +19,9 @@
     "test:e2e:report": "cd e2e && allure generate ./allure-results --clean && allure open"
   },
   "dependencies": {
+    "@heroicons/react": "2.2.0",
     "jotai": "2.16.2",
+    "lucide-react": "0.562.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "5.5.0",

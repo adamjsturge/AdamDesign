@@ -1,4 +1,4 @@
-# **PROJECT_NAME**
+# **Adam Design**
 
 A React application created with create-react-adam.
 

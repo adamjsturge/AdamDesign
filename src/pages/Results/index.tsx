@@ -123,6 +123,9 @@ function TabButton({
         color: active
           ? "var(--preview-text, #f8fafc)"
           : "var(--preview-text-secondary, #94a3b8)",
+        backgroundColor: active
+          ? "var(--preview-bg-surface, #1e293b)"
+          : "transparent",
         borderBottom: active
           ? "2px solid var(--preview-accent, #3b82f6)"
           : "2px solid transparent",
@@ -136,10 +139,16 @@ function TabButton({
 
 function ExportPanel({ preferences }: { preferences: Record<string, string> }) {
   const [exportType, setExportType] = useState<"markdown" | "json">("markdown");
+  const [excludeColors, setExcludeColors] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const markdownContent = generateMarkdown(preferences);
-  const jsonContent = JSON.stringify(generateExportJSON(preferences), null, 2);
+  const exportOptions = { excludeColors };
+  const markdownContent = generateMarkdown(preferences, exportOptions);
+  const jsonContent = JSON.stringify(
+    generateExportJSON(preferences, exportOptions),
+    null,
+    2,
+  );
 
   const content = exportType === "markdown" ? markdownContent : jsonContent;
 
@@ -174,6 +183,27 @@ function ExportPanel({ preferences }: { preferences: Record<string, string> }) {
         className="mx-auto"
         style={{ maxWidth: "var(--preview-container, 80rem)" }}
       >
+        {/* Exclude colors toggle */}
+        <label
+          className="mb-3 flex cursor-pointer items-center"
+          style={{ gap: "var(--preview-gap, 0.5rem)" }}
+        >
+          <input
+            type="checkbox"
+            checked={excludeColors}
+            onChange={(e) => setExcludeColors(e.target.checked)}
+            className="h-4 w-4 cursor-pointer accent-[var(--preview-accent,#3b82f6)]"
+          />
+          <span
+            style={{
+              fontSize: "var(--preview-text-sm, 0.875rem)",
+              color: "var(--preview-text-secondary, #94a3b8)",
+            }}
+          >
+            Exclude colors from export
+          </span>
+        </label>
+
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-2">
             <button

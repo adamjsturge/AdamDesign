@@ -1,6 +1,5 @@
-import { IoPlay, IoShuffle } from "react-icons/io5";
-
 import type { UserPreferences } from "../../types/preferences";
+import { Icon } from "../Icon";
 import {
   getBadgeStyles,
   getBorderUsageStyles,
@@ -94,21 +93,11 @@ export function LandingPreview({ preferences }: LandingPreviewProps) {
           style={{ gap: "var(--preview-gap)" }}
         >
           <PreviewButton style={buttonStyle}>
-            <IoPlay
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="play" context="button" />
             Take the Quiz
           </PreviewButton>
           <PreviewButton style={buttonStyle} secondary>
-            <IoShuffle
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="shuffle" context="button" />
             Shuffle
           </PreviewButton>
         </div>
@@ -214,12 +203,7 @@ export function LandingPreview({ preferences }: LandingPreviewProps) {
         </p>
         <div className="mt-4">
           <PreviewButton style={buttonStyle}>
-            <IoPlay
-              style={{
-                width: "var(--preview-icon-size, 20px)",
-                height: "var(--preview-icon-size, 20px)",
-              }}
-            />
+            <Icon name="play" context="button" />
             Start the Quiz
           </PreviewButton>
         </div>
@@ -235,7 +219,10 @@ export function LandingPreview({ preferences }: LandingPreviewProps) {
           borderRight: "none",
         }}
       >
-        <div className="flex items-center justify-between">
+        <div
+          className="mx-auto flex items-center justify-between"
+          style={{ maxWidth: "var(--preview-container, 56rem)" }}
+        >
           <span
             style={{
               color: "var(--preview-text-secondary)",
@@ -306,11 +293,12 @@ function FeatureCard({
         style={{
           backgroundColor: "var(--preview-accent)",
           borderRadius: "var(--preview-radius)",
-          width: "var(--preview-icon-size-lg, 40px)",
-          height: "var(--preview-icon-size-lg, 40px)",
+          width: "var(--preview-landing-icon-size, 40px)",
+          height: "var(--preview-landing-icon-size, 40px)",
+          padding: "0.5rem",
         }}
       >
-        <IconSvg type={icon} />
+        <Icon name={icon} context="landing" />
       </div>
       <h3
         style={{
@@ -331,29 +319,6 @@ function FeatureCard({
       </p>
     </div>
   );
-}
-
-function IconSvg({ type }: { type: "lightning" | "shield" | "scale" }) {
-  switch (type) {
-    case "lightning":
-      return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-        </svg>
-      );
-    case "shield":
-      return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
-        </svg>
-      );
-    case "scale":
-      return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
-        </svg>
-      );
-  }
 }
 
 function StatItem({
